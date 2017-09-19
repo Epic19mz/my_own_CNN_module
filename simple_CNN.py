@@ -7,54 +7,54 @@ Created on Tue Sep 19 08:54:35 2017
 import tensorflow as tf
 import numpy as np
 def help():
-    """
-    ********Python 3.5 have tensorflow module************
-    hi, welcome to use simple CNN, this module is very easy to use compared with Tensorflow.
-    Some students who know little about Tensorflow or don't have a thick Python background will feel be confused by tensorflow's complex grammer.
-    So maybe they cannot get the real meaning of CNN and cannot use it quickly.
-    As a result, I made this module for them to focus their attention on CNN not Tensorflow.
-    This is a very simple module. Remember these things.
-    First, don't not use functin which begin with '_'
-    Second, the all captical lettle can be revies.
-    Third, 'x,y_,y,keep_prob' is key words, so don't use them as your variables' name
-    Forth, 
-    initialize_cnn(train_x,train_y)
-    reshape_image(x,image_width,image_height)
-    nn_layer(input_tensor, weight_size, layer_name, conv='conv2d', conv2d_strides=[1,1,1,1],act='relu',
-             pool='pool',pool_ksize=[1,2,2,1],pool_strides=[1,2,2,1],keep_prob=1.0)
-    train_cnn(x,y_,keep_prob,y,train_x,train_y,LEARNING_RATE=1e-4,TRAINING_ITERATIONS = 10000,BATCH_SIZE=100,KEEP_PROB=0.25)
-    test_cnn(x,keep_prob,y,test_x,num_label,BATCH_SIZE=100)
-    So, you can use tensorflow in a very easy way and here is an example
-    
-    #This part is to process raw data. The data is mnist, a very wide used data set.
-    import simple_CNN as sc
-    import pandas as pd
-    import numpy as np
-    data = pd.read_csv('G:\\digit\\train.csv')
-    images = data.iloc[:,1:].values
-    images = images.astype(np.float)
-    images = np.multiply(images, 1.0 / 255.0)
-    train_x=images
-    train_y=data.iloc[:,0].values.ravel()
-    test_images = pd.read_csv('G:\\digit\\test.csv').values
-    test_images = test_images.astype(np.float)
-    test_x = np.multiply(test_images, 1.0 / 255.0)
-    
-    #This part is CNN, we have a 4 layers CNN.
-    x,y_,keep_prob=sc.initialize_cnn(train_x,train_y)
-    image=sc.reshape_image(x,28,28)
-    h_1=sc.nn_layer(image,[5,5,1,32],'layer_conv_1')
-    h_2=sc.nn_layer(h_1,[5,5,32,64],'layer_conv_2')
-    h_3=sc.nn_layer(h_2,[7*7*64,1024],'full_connection',conv='matmul',act='relu',pool='dropout',keep_prob=keep_prob)
-    h_4=sc.nn_layer(h_3,[1024,10],'output',conv='matmul',act='softmax',pool=False)
-    y=h_4
-    sc.train_cnn(x,y_,keep_prob,y,train_x,train_y,TRAINING_ITERATIONS=1000)
-    predicted_proba=sc.test_cnn(x,keep_prob,y,test_x,10)
-    predicted_lables = np.argmax(predicted_proba,axis=1)
-    #Now we have our answer
-    #Enjoy you CNN model
-    #If you have any question, please contact me.
-    """
+    print(
+        '********Python 3.5 have tensorflow module************\n\
+        hi, welcome to use simple CNN, this module is very easy to use compared with Tensorflow.\n\
+        Some students who know little about Tensorflow or don\'t have a thick Python background will feel be confused by tensorflow\'s complex grammer.\n\
+        So maybe they cannot get the real meaning of CNN and cannot use it quickly.\n\
+        As a result, I made this module for them to focus their attention on CNN not Tensorflow.\n\
+        This is a very simple module. Remember these things.\n\
+        First, don\'t not use functin which begin with \'_\'\n\
+        Second, the all captical lettle can be revies.\n\
+        Third, \'x,y_,y,keep_prob\' is key words, so don\'t use them as your variables\' name\n\
+        Forth, \n\
+        initialize_cnn(train_x,train_y)\n\
+        reshape_image(x,image_width,image_height)\n\
+        nn_layer(input_tensor, weight_size, layer_name, conv=\'conv2d\', conv2d_strides=[1,1,1,1],act=\'relu\',\n\
+                 pool=\'pool\',pool_ksize=[1,2,2,1],pool_strides=[1,2,2,1],keep_prob=1.0)\n\
+        train_cnn(x,y_,keep_prob,y,train_x,train_y,LEARNING_RATE=1e-4,TRAINING_ITERATIONS = 10000,BATCH_SIZE=100,KEEP_PROB=0.25)\n\
+        test_cnn(x,keep_prob,y,test_x,num_label,BATCH_SIZE=100)\n\
+        So, you can use tensorflow in a very easy way and here is an example\n\
+        \n\
+        #This part is to process raw data. The data is mnist, a very wide used data set.\n\
+        import simple_CNN as sc\n\
+        import pandas as pd\n\
+        import numpy as np\n\
+        data = pd.read_csv(\'G:\\digit\\train.csv\')\n\
+        images = data.iloc[:,1:].values\n\
+        images = images.astype(np.float)\n\
+        images = np.multiply(images, 1.0 / 255.0)\n\
+        train_x=images\n\
+        train_y=data.iloc[:,0].values.ravel()\n\
+        test_images = pd.read_csv(\'G:\\digit\\test.csv\').values\n\
+        test_images = test_images.astype(np.float)\n\
+        test_x = np.multiply(test_images, 1.0 / 255.0)\n\
+        \n\
+        #This part is CNN, we have a 4 layers CNN.\n\
+        x,y_,keep_prob=sc.initialize_cnn(train_x,train_y)\n\
+        image=sc.reshape_image(x,28,28)\n\
+        h_1=sc.nn_layer(image,[5,5,1,32],\'layer_conv_1\')\n\
+        h_2=sc.nn_layer(h_1,[5,5,32,64],\'layer_conv_2\')\n\
+        h_3=sc.nn_layer(h_2,[7*7*64,1024],\'full_connection\',conv=\'matmul\',act=\'relu\',pool=\'dropout\',keep_prob=keep_prob)\n\
+        h_4=sc.nn_layer(h_3,[1024,10],\'output\',conv=\'matmul\',act=\'softmax\',pool=False)\n\
+        y=h_4\n\
+        sc.train_cnn(x,y_,keep_prob,y,train_x,train_y,TRAINING_ITERATIONS=1000)\n\
+        predicted_proba=sc.test_cnn(x,keep_prob,y,test_x,10)\n\
+        predicted_lables = np.argmax(predicted_proba,axis=1)\n\
+        #Now we have our answer\n\
+        #Enjoy you CNN model\n\
+        #If you have any question, please contact me zhenm@uw.edu .\n'
+    )
 def _variable_summaries(var):
   """Attach a lot of summaries to a Tensor (for TensorBoard visualization)."""
   with tf.name_scope('summaries'):
